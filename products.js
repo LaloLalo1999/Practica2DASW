@@ -111,4 +111,32 @@ class Product {
     }
     this._category = value;
   }
+
+  //createFromJson(jsonValue): Esta función debe convertir el String de JSON recibidoen una nueva instancia de producto (utilizando la clase Product)
+  static createFromJson(jsonValue) {
+    let obj = JSON.parse(jsonValue);
+    return Product.createFromObject(obj);
+  }
+
+  // createFromObject(obj): Esta función debe convertir el objeto recibido en una nuevainstancia de producto (utilizando la clase Product) y debe ser capaz de ignorar todosaquellos valores que no pertenezcan a la clase Product.
+  static createFromObject(obj) {
+    let newProduct = {}
+    Object.assign(newProduct, obj);
+    Product.cleanObject(newProduct);
+    
+    let product = new Product(obj.title, obj.description, obj.imageUrl, obj.unit, obj.stock, obj.pricePerUnit, obj.category);
+    product._uuid = obj.uuid;
+
+    return product;
+  }
+
+  // cleanObject(obj): Esta función debe limpiar el objeto recibido de todos aquellosvalores que no pertenezcan a la clase Product
+  static cleanObject(obj) {
+    const productProperties = ["uuid", "title", "description", "imageUrl", "unit", "stock", "pricePerUnit", "category"];
+    for (let prop in obj) {
+      if (!productProperties.includes(prop)) {
+        delete obj[prop];
+      }
+    }
+  }
 }
