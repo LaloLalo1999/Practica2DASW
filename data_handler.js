@@ -22,10 +22,10 @@ function updateProduct(uuid, updatedProduct) {
   if (productIndex === -1) {
     throw new ProductException("Product not found.");
   }
-  products[productIndex].updateItem(updatedProduct);
+  products[productIndex] = Product.createFromObject(updatedProduct);
 }
 
-function deleteProduct() {
+function deleteProduct(uuid) {
   const productIndex = products.findIndex((product) => product.uuid === uuid);
   if (productIndex === -1) {
     throw new ProductException("Product not found.");

@@ -59,8 +59,8 @@ class Product {
     if (typeof value !== "string" || value.length === 0) {
       throw new ProductException("Image URL must be a string.");
     }
-    if (!value.startsWith("http://") && !value.startsWith("https://")) {
-      throw new ProductException("Image URL must start with http:// or https://");
+    if (!value.endsWith(".jpg") && !value.endsWith(".png")) {
+      throw new ProductException("Image URL must end with .jpg or .png.");
     }
     this._imageUrl = value;
   }
@@ -125,14 +125,13 @@ class Product {
     Product.cleanObject(newProduct);
     
     let product = new Product(obj.title, obj.description, obj.imageUrl, obj.unit, obj.stock, obj.pricePerUnit, obj.category);
-    product._uuid = obj.uuid;
 
     return product;
   }
 
   // cleanObject(obj): Esta función debe limpiar el objeto recibido de todos aquellosvalores que no pertenezcan a la clase Product
   static cleanObject(obj) {
-    const productProperties = ["uuid", "title", "description", "imageUrl", "unit", "stock", "pricePerUnit", "category"];
+    const productProperties = ["title", "description", "imageUrl", "unit", "stock", "pricePerUnit", "category"];
     for (let prop in obj) {
       // if prop in productProperties continue, else delete
       if (!productProperties.includes(prop)) {
