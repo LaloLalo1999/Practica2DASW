@@ -134,6 +134,7 @@ class Product {
   static cleanObject(obj) {
     const productProperties = ["uuid", "title", "description", "imageUrl", "unit", "stock", "pricePerUnit", "category"];
     for (let prop in obj) {
+      // if prop in productProperties continue, else delete
       if (!productProperties.includes(prop)) {
         delete obj[prop];
       }
