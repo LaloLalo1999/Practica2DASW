@@ -22,6 +22,7 @@ function updateProduct(uuid, updatedProduct) {
   if (productIndex === -1) {
     throw new ProductException("Product not found.");
   }
+
   products[productIndex] = Product.createFromObject(updatedProduct);
 }
 

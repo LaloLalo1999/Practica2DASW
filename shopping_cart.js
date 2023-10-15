@@ -45,22 +45,22 @@ class ShoppingCart {
     throw new ShoppingCartException("Cannot modify directly, use correct methods.");
   }
 
-addItem(productUuid, amount) {
-  if (typeof productUuid !== "string") {
-    throw new ShoppingCartException("Product UUID must be a string.");
+  addItem(productUuid, amount) {
+    if (typeof productUuid !== "string") {
+      throw new ShoppingCartException("Product UUID must be a string.");
+    }
+    if (typeof amount !== "number") {
+      throw new ShoppingCartException("Amount must be a number.");
+    }
+    if (amount <= 0 || amount % 1 !== 0) {
+      throw new ShoppingCartException("Amount must be a positive whole number.");
+    }
+    if (this.productProxies.find((product) => product.productUuid === productUuid)) {
+      // if exists add amount to existing item
+      const existingProduct = this.productProxies.find((product) => product.productUuid === productUuid);
+      existingProduct.updateItem(productUuid, existingProduct.amount + amount);
+    }
   }
-  if (typeof amount !== "number") {
-    throw new ShoppingCartException("Amount must be a number.");
-  }
-  if (amount <= 0 || amount % 1 !== 0) {
-    throw new ShoppingCartException("Amount must be a positive whole number.");
-  }
-  if (this.productProxies.find((product) => product.productUuid === productUuid)) {
-    // if exists add amount to existing item
-    const existingProduct = this.productProxies.find((product) => product.productUuid === productUuid);
-    existingProduct.updateItem(productUuid, existingProduct.amount + amount);
-  }
-}
 
   updateItem(productUuid, newAmount) {
     // This function should update the amount of an item in the shopping cart to the new amount. If the new amount is invalid, throw an error. If the new amount is 0, remove the item from the shopping cart. Otherwise, update the amount of the item in the shopping cart.

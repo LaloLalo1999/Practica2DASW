@@ -1,7 +1,10 @@
 "use strict";
 
+// Test products.js and data_handler
+// Show empty array of products on page load
 console.log(products)
 
+// Create products
 let product1 = new Product(
   "Headphones",
   "Noise cancelling headphones",
@@ -39,6 +42,7 @@ let product4 = Product.createFromObject({
   "category": "Electronics"
 })
 
+// Add products to the array and console log them
 createProduct(product1);
 console.log(`Added product: ${products[products.length - 1].title}`);
 createProduct(product2);
@@ -48,10 +52,12 @@ console.log(`Added product: ${products[products.length - 1].title}`);
 createProduct(product4);
 console.log(`Added product: ${products[products.length - 1].title}`);
 
+// Show all products
 for (let product of products) {
   console.log(product);
 }
 
+// Create a new product to replace product 3
 let newproduct3 = new Product(
   "Shoes",
   "Shoes with sensors for men",
@@ -62,14 +68,39 @@ let newproduct3 = new Product(
   "Clothing"
 )
 
+// Update product 3
 updateProduct(products[2].uuid, newproduct3);
 console.log(`Updated product: ${products[2].title} 's \n UUID to: ${products[2].uuid} \n description to: ${products[2].description}`);
 
+// Console log the product 3 getting it by its uuid
 console.log(getProductById(products[2].uuid));
 
+// Delete product 3
 console.log(`Deleted product: ${products[3].title}`);
 deleteProduct(products[3].uuid);
 
+// Show all products
 for (let product of products) {
   console.log("product: ", product);
 }
+
+// Make 3 searches with different queries, one by category, one by title, and one by both
+// Create queries
+const query1 = "Clothing:";
+const query2 = ":Shoes";
+const query3 = "Electronics:Headphones";
+
+// Find products
+(findProduct(query1)).forEach(item => console.log(`Query: ${query1}, uuid: ${item.uuid}`));
+(findProduct(query2)).forEach(item => console.log(`Query: ${query2}, uuid: ${item.uuid}`));
+(findProduct(query3)).forEach(item => console.log(`Query: ${query3}, uuid: ${item.uuid}`));
+
+// Test shopping_cart.js
+// Add 3 items from products to a new ShoppingCart instance
+const shoppingCart = new ShoppingCart();
+// shoppingCart.addProduct(products[0]);
+// shoppingCart.addProduct(products[1]);
+// shoppingCart.addProduct(products[2]);
+
+// // console.log all of the items in the shopping cart
+// console.log(shoppingCart);
