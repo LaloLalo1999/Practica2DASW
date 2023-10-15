@@ -98,9 +98,9 @@ const query3 = "Electronics:Headphones";
 // Test shopping_cart.js
 // Add 3 items from products to a new ShoppingCart instance
 const shoppingCart = new ShoppingCart();
-// shoppingCart.addProduct(products[0]);
-// shoppingCart.addProduct(products[1]);
-// shoppingCart.addProduct(products[2]);
+shoppingCart.addItem(products[0].uuid, 1);
+shoppingCart.addItem(products[1].uuid, 2);
+shoppingCart.addItem(products[2].uuid, 3);
 
-// // console.log all of the items in the shopping cart
-// console.log(shoppingCart);
+// Show shopping cart
+console.log(shoppingCart);
