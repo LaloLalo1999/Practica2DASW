@@ -73,7 +73,7 @@ class ShoppingCart {
     }
 
     // Create a copy of the actual product
-    const productCopy = Product.createFromObject(actualProduct);
+    const productCopy = Product.createFromObject(actualProduct, productUuid);
 
     if (existingProductIndex !== -1) {
       // if exists, add amount to existing item
@@ -112,15 +112,22 @@ class ShoppingCart {
 
   removeItem(productUuid) {
     // find -> remove existing or throw error if not found
-    const productIndex = this.productProxies.findIndex(
+    const productProxyIndex = this.productProxies.findIndex(
       (product) => product.productUuid === productUuid
     );
-    if (productIndex === -1) {
+    if (productProxyIndex === -1) {
       throw new ShoppingCartException("Product not found.");
     } else {
-      this.productProxies.splice(productIndex, 1);
+      this.productProxies.splice(productProxyIndex, 1);
     }
-    // use splice to remove item
+
+    // Remove the corresponding product copy from _products array
+    const productIndex = this._products.findIndex(
+      (product) => product.uuid === productUuid
+    );
+    if (productIndex !== -1) {
+      this._products.splice(productIndex, 1);
+    }
   }
 
   calculateTotal() {

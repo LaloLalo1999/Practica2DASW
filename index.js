@@ -1,9 +1,5 @@
 "use strict";
-
-// Test products.js and data_handler
-// Show empty array of products on page load
 console.log(products)
-
 // Create products
 let product1 = new Product(
   "Headphones",
@@ -40,8 +36,7 @@ let product4 = Product.createFromObject({
   "stock": 54,
   "pricePerUnit": 200,
   "category": "Electronics"
-})
-
+});
 // Add products to the array and console log them
 createProduct(product1);
 console.log(`Added product: ${products[products.length - 1].title}`);
@@ -104,3 +99,15 @@ shoppingCart.addItem(products[2].uuid, 3);
 
 // Show shopping cart
 console.log(shoppingCart);
+
+// Update item in shopping cart
+console.log(shoppingCart.productProxies[0].amount);
+shoppingCart.updateItem(products[0].uuid, 5);
+console.log(shoppingCart.productProxies[0].amount);
+
+// Remove item from shopping cart
+shoppingCart.removeItem(products[2].uuid);
+console.log(shoppingCart);
+
+// Calculate total
+console.log(shoppingCart.calculateTotal());

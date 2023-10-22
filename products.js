@@ -119,12 +119,15 @@ class Product {
   }
 
   // createFromObject(obj): Esta función debe convertir el objeto recibido en una nuevainstancia de producto (utilizando la clase Product) y debe ser capaz de ignorar todosaquellos valores que no pertenezcan a la clase Product.
-  static createFromObject(obj) {
+  static createFromObject(obj, uuid = null) {
     let newProduct = {}
     Object.assign(newProduct, obj);
     Product.cleanObject(newProduct);
     
     let product = new Product(obj.title, obj.description, obj.imageUrl, obj.unit, obj.stock, obj.pricePerUnit, obj.category);
+    if (uuid) {
+      product._uuid = uuid;
+    }
 
     return product;
   }
